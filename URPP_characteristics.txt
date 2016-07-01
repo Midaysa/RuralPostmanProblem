@@ -1,0 +1,9 @@
+Set: name of the set of instances
+Aver.: average
+
+
+		Nodes	     |		Edges	      |		R-Sets
+Set	Aver.	Min	Max  |	Aver.	Min	Max   |	Aver.	Min	Max
+UR500	446.0 	298 	499  | 	1128.9 	597 	1526  |	35.3 	1 	99
+UR750	665.7 	452 	749  | 	1698.41 915 	2314  |	55.7 	1 	140
+UR1000	886.2 	605 	1000 | 	2289.9 	1122 	3083  |	74.8 	1 	204
