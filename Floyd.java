@@ -8,7 +8,7 @@ public class Floyd {
 
 
     public Floyd(EdgeWeightedGraph G) {
-
+        
         int V = G.V();
         distancia = new double[V][V];
         arcofinal = new Edge[V][V]; 
@@ -25,10 +25,12 @@ public class Floyd {
 		*  Inicializacion de los ultimos arcos de los caminos existentes en el digrafo
         */
         for (int i=0; i < V; i++) {
-        
+            
             for (Edge e : G.adj(i)) {  
                 distancia[e.either()][e.other(e.either())] = e.weight(); // Actualizacion de la distancia del camino
+                distancia[e.other(e.either())][e.either()] = e.weight(); 
                 arcofinal[e.either()][e.other(e.either())] = e; // Actualizacion de arco final del camino
+                arcofinal[e.other(e.either())][e.either()] = e;
             }
             
             // Actualizacion de valores de distancia y arco final de camino
@@ -43,35 +45,58 @@ public class Floyd {
         for (int v = 0; v < V; v++) {
             // Para cada vertice, se realiza busqueda del camino con menor distancia
 
-            for (int i =0; i < V; i++) {  
-
+            for (int i = 0; i < V; i++) {  
             	// Salida del ciclo for actual en caso de que el arco final sea null
             	// para evitar recorrido innecesario en el siguiente ciclo for
                 if (arcofinal[i][v] == null) continue;  
 
                 for (int j = 0; j < V; j++) {  
-
+                    
                     if (distancia[i][j] > distancia[i][v] + distancia[v][j]) { // Verifica distancia mas corta
-
                         distancia[i][j] = distancia[i][v] + distancia[v][j]; // Actualizacion de distancia mas corta
                         arcofinal[i][j] = arcofinal[v][j];  // Actualicacion de arco final del camino mas corto
+                        //System.out.println(arcofinal[i][j]);
+                        //arcofinal[i][j] = arcofinal[i][v]; 
                     }
                 }
             }
         }
+        
+        // for (int i = 0; i < V; i++) {
+        //     for (int j = 0; j < V; j++) {
+        //         System.out.println(i + " " + j);
+        //         System.out.println("dist["+i+"]["+j+"] = " + distancia[i][j]);
+        //     }
+        // }
+        System.out.println();
     }
+    
      
-
+    
     /**
-	* Distancia del camino
+     * Calcula la distancia del camino entre los vertices <tt>s</tt> y <tt>t</tt>.
+     * 
+     * @param   s   primer vertice
+     * @param   t   segundo vertice
+     * @return Double  Distancia previamente calculada.
      */
+     
     public double dist(int s, int t) {
         return distancia[s][t];
+        
+        
     }
+    
 
     /**
-	* Verifica existencia de camino
-     */
+     * Varifica si hay un camino entre los vertices <tt>s</tt> y <tt>t</tt>.
+     * 
+     * @param   G   grafo
+     * @param   s   primer vertice
+     * @param   t   segundo vertice
+     * @return <tt>true</tt>  Si el camino existe.
+     *         <tt>false</tt> En caso contrario.
+     */     
     public boolean hayCamino(int s, int t) {
     	if (distancia[s][t] < Double.POSITIVE_INFINITY) { //Verifica su valor actual sea menor que inicializacion
     		return true;
@@ -97,6 +122,7 @@ public class Floyd {
             * hasta llegar al vertice de partida
             */
             camino.add(e); 
+           
         }
 
 		// Invierte ArrayList para obtener el camino mas corto en orden correcto
@@ -109,17 +135,28 @@ public class Floyd {
 	
           In in = new In(args[0]);
           EdgeWeightedGraph G = new EdgeWeightedGraph(in);
-          System.out.println(G);
+          //System.out.println(G);
           Floyd caminosFloyd = new Floyd(G);
-
-          double  t = caminosFloyd.dist(0,1);
+          
+        
+          double  t = caminosFloyd.dist(2,3);
           System.out.println("Distancia: "+t);
-          System.out.println("Path: "+caminosFloyd.path(0,1));
+         // System.out.println("Path: "+caminosFloyd.path(2,3));
+        
+        double r = caminosFloyd.dist(1,2);
+        System.out.println("Distancia: "+r);
+        //System.out.println("Path: "+caminosFloyd.path(1,2));
+
+          
+
+          double  p = caminosFloyd.dist(3,1);
+          System.out.println("Distancia: "+p);
+          //System.out.println("Path: "+caminosFloyd.path(3,1));
 
 
-          double  f = caminosFloyd.dist(0,4);
+          double  f = caminosFloyd.dist(3,2);
           System.out.println("Distancia: "+f);
-          System.out.println("Path: "+caminosFloyd.path(0,4));
+          //System.out.println("Path: "+caminosFloyd.path(3,2));
     }    
     
 }

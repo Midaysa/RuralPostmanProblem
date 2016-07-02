@@ -21,7 +21,11 @@ public class GreedyPerfectMatch {
             }
         });
         
-        while (!V.isEmpty()) {
+        System.out.println("L = " + L);
+        System.out.println("V = " + V);
+        
+        while (!V.isEmpty() && !L.isEmpty()) {
+            // System.out.println("One iteration");
             e = L.get(L.size() - 1);
             L.remove(L.size() - 1);
             u = e.either();

@@ -34,13 +34,11 @@ public class DepthFirstSearchDirected {
 	}
 
 	public void dfsAlternativo(Digraph G, int v){
-
 		this.color[v] = 1;
 
 		for( int i : G.adj(v) ){
 
 			if(this.color[i] == 0){
-
 				this.antes_visit[i] = v;
 				this.dfsAlternativo( G, i);
 
@@ -81,6 +79,7 @@ public class DepthFirstSearchDirected {
 	*/
 	public Integer[] arcsVisited(){	return this.antes_visit; }
 
+
 	/**
 	* 
 	* @param vertice v
@@ -99,6 +98,7 @@ public class DepthFirstSearchDirected {
 		return dp;
 	}
 
+
 	/**
 	*
 	* @return lista enlazada con todos los caminos desde el vertice s hasta los vertices alcanzables desde s.
@@ -114,6 +114,7 @@ public class DepthFirstSearchDirected {
 		}
 		return gip; 
 	}
+
 
 	public static void  main(String args[]){
 		In in = new In(args[0]);

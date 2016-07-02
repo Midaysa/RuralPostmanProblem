@@ -32,6 +32,16 @@ public class ConnectedComponents {
         return finalComponents;
     }
 
+
+
+    /**
+     * Aplica el algortimo de dfs para hallar el camino desde s. 
+     * 
+     * @param  G grafo
+     * @param s vertice donde se comienza aplicar el dfs
+     * @param ccNumber es el numero de componentes que van a recibir los nodos que visita el dfs
+     * @param commpenents es un arreglo que indica si el nodo esta asignado a una componente correspondiente
+     */
     public void dfs(EdgeWeightedGraph G, int s, int ccNumber, Integer[] components) {
         Stack<Integer> S = new Stack<Integer>();
         int v, w;
@@ -54,6 +64,11 @@ public class ConnectedComponents {
         }
     }
     
+    
+    
+    /**
+     * Pruebas unitarias de el tipo de dato <tt>ConnectedComponents/tt>.
+     */
     public static void main(String args[]) {
         In in = new In(args[0]);
         EdgeWeightedGraph G = new EdgeWeightedGraph(in);

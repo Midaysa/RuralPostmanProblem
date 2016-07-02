@@ -50,4 +50,19 @@ public class Kruskal {
     public double weight() {
 	  return cost;
     }
+    
+    
+    public static void main(String[] args) {
+          In in = new In(args[0]);
+          EdgeWeightedGraph G = new EdgeWeightedGraph(in);
+        Kruskal K = new Kruskal(G);
+        LinkedHashSet<Edge> mst = new LinkedHashSet<Edge>();
+        mst = K.getEdgesMST();
+        
+        for (Edge e : G.edges()) {
+            System.out.println("u " + e.either());
+            System.out.println("v " + e.other(e.either()));
+            System.out.println("weigth " + e.weight());
+        }
+    }
 }

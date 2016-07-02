@@ -1,4 +1,3 @@
-
 /**
  *  The <tt>EulerianCycle</tt> class represents a data type
  *  for finding an Eulerian cycle or path in a graph.
@@ -23,13 +22,17 @@
  *  @author Kevin Wayne
  *  @author Nate Liu
  */
+
+import java.util.ArrayList;
+
 public class EulerianCycle {
-    private Stack<Integer> cycle = new Stack<Integer>();  // Eulerian cycle; null if no such cycle
+    public Stack<Integer> cycle = new Stack<Integer>();  // Eulerian cycle; null if no such cycle
     
     // empty constructor to allow using public functions on other graphs without
     // applying all the cycle calculations
     public EulerianCycle() {}
     
+
     /**
      * Computes an Eulerian cycle in the specified graph, if one exists.
      * 
@@ -101,16 +104,25 @@ public class EulerianCycle {
         assert certifySolution(G);
     }
 
+
     /**
      * Returns the sequence of vertices on an Eulerian cycle.
      * 
      * @return the sequence of vertices on an Eulerian cycle;
      *         <tt>null</tt> if no such cycle
      */
-    public Iterable<Integer> cycle() {
+     public Iterable<Integer> cycle() {
         return cycle;
-    }
-
+     }
+    //  public ArrayList<Integer> cycle() {
+    //     ArrayList<Integer> road = new ArrayList<Integer>();
+        
+    //      for(Integer i: cycle){
+    //          road.add(cycle.pop());
+    //      }
+         
+    //      return road;
+    //  }
     /**
      * Returns true if the graph has an Eulerian cycle.
      * 
@@ -120,6 +132,7 @@ public class EulerianCycle {
     public boolean hasEulerianCycle() {
         return cycle != null;
     }
+
 
     // returns any non-isolated vertex; -1 if no such vertex
     private static int nonIsolatedVertex(EdgeWeightedGraph G) {
@@ -160,8 +173,17 @@ public class EulerianCycle {
 
         return true;
     }
-
+    
+    
+    /**
+     * Verifica si el grafo es conexo..
+     * 
+     * @param   G   grafo
+     * @return <tt>true</tt>  Si el grafo es conexo
+     *         <tt>false</tt> En caso contrario
+     */
     public boolean isConnected(EdgeWeightedGraph G){
+        
         int s = nonIsolatedVertex(G);
         BreadthFirstPaths bfs = new BreadthFirstPaths(G, s);
         for (int v = 0; v < G.V(); v++)
@@ -171,6 +193,15 @@ public class EulerianCycle {
         return true;
     }
     
+    
+        
+    /**
+     * Verifica si el grafo es par
+     * 
+     * @param   G   grafo
+     * @return <tt>true</tt>  Si el grafo es par
+     *         <tt>false</tt> En caso contrario
+     */
     public boolean isPair(EdgeWeightedGraph G){
         for (int v = 0; v < G.V(); v++) 
             if (G.degree(v) % 2 != 0)
@@ -178,7 +209,7 @@ public class EulerianCycle {
         return true;
     }
 
-    // check that solution is correct
+
     private boolean certifySolution(EdgeWeightedGraph G) {
 
         // internal consistency check
@@ -215,10 +246,18 @@ public class EulerianCycle {
         EdgeWeightedGraph G = new EdgeWeightedGraph(in);
         EulerianCycle euler = new EulerianCycle(G);
         
+        //euler.isConnected(G);
+        //StdOut.println(euler.isConnected(G));
+        //ArrayList<Integer> bla = new ArrayList<Integer>();
+        //bla = euler.cycle();
+        
+        //for (Integer e : bla)
+        //    System.out.println(" " + e);
+            
         if (euler.hasEulerianCycle(G)) {
             
-            for (int i = 0; i < G.V(); i++)
-                StdOut.print(G.degree(i) + " ");
+            //for (int i = 0; i < G.V(); i++)
+            //    StdOut.print(G.degree(i) + " ");
             
             for (int v : euler.cycle()) {
                 StdOut.print(v + " ");

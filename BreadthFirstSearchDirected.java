@@ -12,7 +12,6 @@ import java.util.*;
 public class BreadthFirstSearchDirected{
 
 	private static final String NEWLINE = System.getProperty("line.separator");
-
 	public Integer[] antes_visit;
 	public int[] color;
 	public int num_v;
@@ -21,17 +20,15 @@ public class BreadthFirstSearchDirected{
 	* Hace llamado al algoritmo bfs dado un vertice <tt>s</tt>.
 	*/
 	public BreadthFirstSearchDirected( Digraph G, int s){
-
 		antes_visit = new Integer[G.V()];
 		color = new int[G.V()];
 		num_v = G.V();
-		
 
 		for(int i=0; i<G.V(); i++){
 			antes_visit[i] = null;
 			color[i] = 0;
 		}
-
+		
 		bfs(G,s); 
 	}
 
@@ -45,31 +42,23 @@ public class BreadthFirstSearchDirected{
 
 		LinkedList<Integer> cola = new LinkedList<Integer>();
 		int u;
-
 		this.color[s] = 1;
-
 		cola.add(s);
 
 		while( !(cola.isEmpty()) ){
-
 			u = cola.removeFirst();
 
 			for( int i : G.adj(u) ){
 
 				if( this.color[i] == 0 ){
-
 					this.color[i] = 1;
 					this.antes_visit[i] = u;
 					cola.addLast(i);
-
 				}
-
 			}
 
 			this.color[u] = 2;
-
 		}
-
 	}
 
 	/**
